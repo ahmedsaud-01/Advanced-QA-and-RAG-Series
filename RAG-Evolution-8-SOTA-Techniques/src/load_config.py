@@ -123,6 +123,7 @@ class APPConfig:
             standard_rag=StandardRAGConfig(**cfg["standard_rag"]),
         )
 
+
 # Example usage:
 # config = APPConfig.load("configs/config.yml")
 # or

@@ -7,9 +7,9 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 import chromadb
 from langchain.schema import Document
-from src.load_config import APPConfig
+from load_config import APPConfig
 
-APP_CONFIG = APPConfig().load()
+APP_CONFIG = APPConfig.load()
 
 
 class AdaptiveRAG:

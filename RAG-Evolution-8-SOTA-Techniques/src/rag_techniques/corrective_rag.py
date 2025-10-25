@@ -6,12 +6,12 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from pydantic import BaseModel, Field
-from src.load_config import APPConfig
+from load_config import APPConfig
 import chromadb
 from langchain.schema import Document
 from openai import OpenAI
 
-APP_CONFIG = APPConfig().load()
+APP_CONFIG = APPConfig.load()
 
 
 class CorrectiveRAG:

@@ -12,7 +12,7 @@ What are its main use cases?
 =======================================================================================================================================
 3-adaptive_rag <==> (tech_docs)
 
-1. Standard Route - Queries: What is Python?, How long does shipping take?, What is Docker?
+1. Standard Route - Queries: What is Python?
 
 When: Clear, direct questions with obvious intent
 What it does: Single similarity search retrieval
@@ -27,7 +27,12 @@ Examples: "Compare X and Y", "Pros and cons of...", "Difference between..."
 Process: Query → Initial retrieval (3 docs) → Alternative search (2 docs) → Deduplicate → Generate
 Speed: Slower (multiple retrievals + deduplication)
 
-3. Rewrite Route - Queries: How does it work? or Tell me more about that - without any context
+3. Rewrite Route (without any context) - Queries:
+ 
+How does it work? 
+or 
+Tell me more about that 
+
 When: Vague or unclear questions with missing context
 What it does: Rewrites query for clarity, then standard retrieval
 Process: Query → LLM rewrite → Retrieve with improved query → Generate
@@ -52,7 +57,8 @@ Should Trigger Correction with Web Search:
 
 =======================================================================================================================================
 5-HyDE
- "What are the security considerations for cloud computing?" on tech_docs
+ on tech_docs: "What are the security considerations for cloud computing?" on tech_docs
+ 
 This should:
 Generate a detailed hypothetical document about cloud security
 Use that synthetic document to find relevant real documents (Cloud Computing, Cybersecurity, DevOps)

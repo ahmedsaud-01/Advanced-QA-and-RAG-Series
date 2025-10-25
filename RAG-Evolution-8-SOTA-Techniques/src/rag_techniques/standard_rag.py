@@ -4,11 +4,11 @@ from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-from src.load_config import APPConfig
+from load_config import APPConfig
 import chromadb
 from langchain.schema import Document
 
-APP_CONFIG = APPConfig().load()
+APP_CONFIG = APPConfig.load()
 
 
 class StandardRAG:

@@ -6,9 +6,9 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain.schema import Document
 from openai import OpenAI
 import chromadb
-from src.load_config import APPConfig
+from load_config import APPConfig
 
-APP_CONFIG = APPConfig().load()
+APP_CONFIG = APPConfig.load()
 
 
 class AgenticRAG:

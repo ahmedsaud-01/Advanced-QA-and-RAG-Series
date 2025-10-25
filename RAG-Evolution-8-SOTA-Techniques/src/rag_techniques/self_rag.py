@@ -7,10 +7,10 @@ from langchain_core.runnables import RunnablePassthrough
 from pydantic import BaseModel, Field
 import chromadb
 from langchain.schema import Document
-from src.load_config import APPConfig
+from load_config import APPConfig
 
 
-APP_CONFIG = APPConfig().load()
+APP_CONFIG = APPConfig.load()
 
 
 class SelfRAG:
