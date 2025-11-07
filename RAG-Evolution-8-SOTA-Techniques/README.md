@@ -135,17 +135,27 @@ python src/app.py
 ```
 rag-evolution/
 ├─ src/
-│  ├─ app.py                # Entry point: select strategy & Q&A loop
-│  ├─ data_processor.py     # Build synthetic dataset & Chroma index
-│  └─ rag_techniques/       # Strategy implementations / router
+│ ├─ rag_techniques/
+│ │ ├─ adaptive_rag.py
+│ │ ├─ agentic_rag.py
+│ │ ├─ conversational_rag.py
+│ │ ├─ corrective_rag.py
+│ │ ├─ fusion_rag.py
+│ │ ├─ hyde_rag.py
+│ │ ├─ speculative_rag.py
+│ │ └─ standard_rag.py
+│ ├─ app.py                      # Entry point: select strategy & Q&A loop
+│ └─ data_processor.py           # Build synthetic dataset & Chroma index
+├─ configs/
+│ └─ config.yml                  # Global config (model, retriever, paths)
 ├─ data/
-│  └─ chroma_db/             # Chroma persistent store
+│ └─ chroma_db/                  # Chroma persistent store
 ├─ requirements.txt
 ├─ README.md
-├─ .here                    # Required for using pyprojroot
-├─ queries.txt              # Sample queries
-├─ references.txt           # References that were used to implement this project
-└─ .env.example             # (Optional) environment template
+├─ .here                         # Required for using pyprojroot
+├─ queries.txt                   # Sample queries
+├─ references.txt                # Sources/links used while implementing
+└─ .env.example                  # Environment template
 ```
 
 ---
