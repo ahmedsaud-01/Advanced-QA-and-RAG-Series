@@ -83,7 +83,7 @@ class ConversationalRAG:
             return "No previous conversation."
 
         # Take last 5 exchanges to avoid token limit issues
-        recent_history = history[-5:]
+        recent_history = history[-APP_CONFIG.conversational_rag.chat_history_length:]
         formatted = []
 
         for exchange in recent_history:

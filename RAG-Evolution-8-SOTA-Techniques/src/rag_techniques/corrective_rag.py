@@ -135,7 +135,7 @@ class CorrectiveRAG:
             client = OpenAI()
 
             # Create a more focused search query
-            # Limit query length
+            # Limit query length!!!
             focused_query = f"Brief summary: {query[:50]}"
 
             response = client.responses.create(
@@ -202,7 +202,7 @@ class CorrectiveRAG:
             self._log(
                 "Decision: NO relevant documents found - web search required")
             need_web_search = True
-        elif relevance_ratio < 0.5:
+        elif relevance_ratio < APP_CONFIG.corrective_rag.relevance_ratio:
             self._log("Decision: LOW relevance ratio - web search recommended")
             need_web_search = True
         else:

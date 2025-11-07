@@ -15,6 +15,7 @@ class CorrectiveRAGConfig:
     web_search_model: str
     temperature: float
     top_k: int
+    relevance_ratio: float
 
 
 @dataclass
@@ -39,6 +40,7 @@ class ConversationalRAGConfig:
     llm_model: str
     temperature: float
     top_k: int
+    chat_history_length: int
 
 
 @dataclass

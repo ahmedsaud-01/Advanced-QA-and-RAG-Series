@@ -14,8 +14,8 @@ APP_CONFIG = APPConfig.load()
 class AgenticRAG:
     def __init__(self):
         self.embeddings = OpenAIEmbeddings(model=APP_CONFIG.embedding_model)
-        self.llm = ChatOpenAI(model=APP_CONFIG.corrective_rag.llm_model,
-                              temperature=APP_CONFIG.corrective_rag.temperature)
+        self.llm = ChatOpenAI(model=APP_CONFIG.agentic_rag.llm_model,
+                              temperature=APP_CONFIG.agentic_rag.temperature)
         self.logs = []
         self.retrievers = {}
         self._setup_retrievers()
@@ -263,7 +263,7 @@ class AgenticRAG:
             client = OpenAI()
 
             response = client.responses.create(
-                model=self.llm,
+                model=APP_CONFIG.agentic_rag.llm_model,
                 tools=[{
                     "type": "web_search_preview",
                     "search_context_size": "low"

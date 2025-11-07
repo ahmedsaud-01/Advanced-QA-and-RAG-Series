@@ -90,58 +90,35 @@ Provide a detailed answer based on the evidence above. Be thorough and accurate.
 
 Answer:""")
 
-        # FIXED: Much more critical verification prompt
-        self.verification_prompt = ChatPromptTemplate.from_template("""
-                    You are a STRICT verification agent. Evaluate this answer critically and assign a harsh but fair score.
+        self.verification_prompt_with_focus = ChatPromptTemplate.from_template("""
+                        You are a STRICT verification agent with a specific focus area. {focus_instruction}
 
-                    Evidence Available:
-                    {evidence}
+                        Evidence Available:
+                        {evidence}
 
-                    Question: {question}
-
-                    Proposed Answer:
-                    {answer}
-
-                    STRICT EVALUATION CRITERIA:
-                    - Score 9-10: EXCEPTIONAL - Completely accurate, uses ALL relevant evidence, perfectly structured, no gaps
-                    - Score 7-8: GOOD - Mostly accurate, uses most evidence well, minor issues or missed opportunities  
-                    - Score 5-6: ADEQUATE - Partially accurate, uses some evidence, has noticeable gaps or errors
-                    - Score 3-4: POOR - Limited accuracy, minimal evidence use, significant problems
-                    - Score 1-2: VERY POOR - Inaccurate, doesn't use evidence well, major errors
-
-                    CHECK FOR THESE ISSUES (deduct points):
-                    - Missing key information from evidence (-1 to -3 points)
-                    - Inaccurate statements not supported by evidence (-2 to -4 points)
-                    - Poor organization or unclear explanations (-1 to -2 points)
-                    - Repetitive or redundant content (-1 point)
-                    - Doesn't fully answer the question asked (-2 to -3 points)
-                    - Generic statements that could apply to any topic (-1 to -2 points)
-
-                    IMPORTANT: Most answers have flaws. Be critical. Scores of 9-10 should be rare and only for truly exceptional responses.
-
-                    Provide ONLY the numerical score (1-10):""")
-
-        # Additional verification prompt for detailed scoring
-        self.detailed_verification_prompt = ChatPromptTemplate.from_template("""
-                        You are evaluating this answer across multiple dimensions. Be critical and specific.
-
-                        Evidence: {evidence}
                         Question: {question}
-                        Answer: {answer}
 
-                        Rate each dimension (1-10) and explain briefly:
+                        Proposed Answer:
+                        {answer}
 
-                        ACCURACY: How factually correct is the answer?
-                        COMPLETENESS: How well does it address all aspects of the question?
-                        EVIDENCE_USE: How effectively does it incorporate the provided evidence?
-                        CLARITY: How clear and well-organized is the response?
+                        STRICT EVALUATION CRITERIA:
+                        - Score 9-10: EXCEPTIONAL - Near perfect, exceptional quality in your focus area
+                        - Score 7-8: GOOD - Solid quality but noticeable room for improvement in your focus area  
+                        - Score 5-6: ADEQUATE - Acceptable but clear deficiencies in your focus area
+                        - Score 3-4: POOR - Significant problems in your focus area
+                        - Score 1-2: VERY POOR - Major failures in your focus area
 
-                        Format your response as:
-                        ACCURACY: [score] - [brief reason]
-                        COMPLETENESS: [score] - [brief reason]
-                        EVIDENCE_USE: [score] - [brief reason]
-                        CLARITY: [score] - [brief reason]
-                        OVERALL: [average score]""")
+                        Your focus: {focus_instruction}
+
+                        CHECK FOR THESE SPECIFIC ISSUES:
+                        - Missing key information from evidence (-2 to -4 points)
+                        - Inaccurate or unsupported statements (-3 to -5 points)
+                        - Poor organization or unclear explanations (-1 to -3 points)
+                        - Doesn't fully answer the question (-2 to -4 points)
+                        - Generic or superficial content (-1 to -3 points)
+
+                        Be HARSH. Most answers should score 4-7. Only truly exceptional answers deserve 8+.
+                        Provide ONLY the numerical score (1-10):""")
 
     def _log(self, message: str):
         """Enhanced logging with visual separators"""
@@ -228,40 +205,10 @@ Answer:""")
             ]
 
             # Use different verification approach for each draft
-            verification_prompt_with_focus = ChatPromptTemplate.from_template("""
-                        You are a STRICT verification agent with a specific focus area. {focus_instruction}
-
-                        Evidence Available:
-                        {evidence}
-
-                        Question: {question}
-
-                        Proposed Answer:
-                        {answer}
-
-                        STRICT EVALUATION CRITERIA:
-                        - Score 9-10: EXCEPTIONAL - Near perfect, exceptional quality in your focus area
-                        - Score 7-8: GOOD - Solid quality but noticeable room for improvement in your focus area  
-                        - Score 5-6: ADEQUATE - Acceptable but clear deficiencies in your focus area
-                        - Score 3-4: POOR - Significant problems in your focus area
-                        - Score 1-2: VERY POOR - Major failures in your focus area
-
-                        Your focus: {focus_instruction}
-
-                        CHECK FOR THESE SPECIFIC ISSUES:
-                        - Missing key information from evidence (-2 to -4 points)
-                        - Inaccurate or unsupported statements (-3 to -5 points)
-                        - Poor organization or unclear explanations (-1 to -3 points)
-                        - Doesn't fully answer the question (-2 to -4 points)
-                        - Generic or superficial content (-1 to -3 points)
-
-                        Be HARSH. Most answers should score 4-7. Only truly exceptional answers deserve 8+.
-                        Provide ONLY the numerical score (1-10):""")
-
             focus_instruction = differentiation_prompts[draft_index % len(
                 differentiation_prompts)]
 
-            verify_chain = verification_prompt_with_focus | self.verifier_llm | StrOutputParser()
+            verify_chain = self.verification_prompt_with_focus | self.verifier_llm | StrOutputParser()
 
             score_text = verify_chain.invoke({
                 "evidence": evidence_text,
