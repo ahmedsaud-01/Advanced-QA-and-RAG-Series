@@ -2,6 +2,7 @@
 This repository contains advanced LLM-based chatbots for Retrieval Augmented Generation (RAG) and Q&A with different databases. (VectorDB, GraphDB, SQLite, CSV, XLSX, etc.). The repository provides guide on using both AzureOpenAI and OpenAI API for each project. Each project is accompanied with a YouTube video that explains all the details. The link to the videos are provided in each section.
 
 ## List of projects:
+- [x] [RAG-Evolution-8-SOTA-Techniques](#RAG-Evolution-8-SOTA-Techniques)
 - [x] [LangGraph_1o1_Agentic_Customer_Support](#LangGraph_1o1_Agentic_Customer_Support)
 - [x] [AgentGraph-Intelligent-Q&A-and-RAG-System](#AgentGraph-Intelligent-Q&A-and-RAG-System)
 - [x] [Q&A-and-RAG-with-SQL-and-TabularData](#Q&A-and-RAG-with-SQL-and-TabularData)
@@ -34,6 +35,27 @@ NOTE: This is the general structure of the projects, however there might be smal
 **Key Note 4:** Familiarity with database query languages such as Pandas for Python, SQL, and Cypher can enhance the user's ability to ask more better questions and have a richer interaction with the graph agent.
 
 ## Project description:
+<!-- ====================================== -->
+<!-- RAG-Evolution-8-SOTA-Techniques -->
+<!-- ====================================== -->
+<a id="RAG-Evolution-8-SOTA-Techniques"></a>
+<h3><a style=" white-space:nowrap; " href="https://github.com/Farzad-R/Advanced-QA-and-RAG-Series/tree/main/RAG-Evolution-8-SOTA-Techniques"><b>RAG-Evolution-8-SOTA-Techniques:</b></a></h3>
+
+Strategies:
+
+| Technique                 | What it adds                                    | Typical win                       |
+| ------------------------- | ----------------------------------------------- | --------------------------------- |
+| **Simple RAG w/ Memory**  | Session/user context recall                     | Personalization & coherence       |
+| **Corrective RAG (CRAG)** | Grade retrieved docs, re-retrieve if weak       | Reliability on incomplete corpora |
+| **Adaptive RAG**          | Vary retrieval depth by query complexity        | Efficiency & responsiveness       |
+| **Self-RAG**              | Reflect, decide to retrieve, verify claims      | Factual robustness                |
+| **Fusion RAG**            | Multi-retrieval + result fusion                 | Coverage of siloed sources        |
+| **Speculative RAG**       | Small model drafts, large model verifies        | Speed at scale, cost control      |
+| **Agentic RAG**           | Planner/Researcher/Synthesizer (+ tools)        | Multi-step reasoning & tools      |
+| **HyDE**                  | Generate hypothetical answer → embed → retrieve | Zero-shot recall, quirky phrasing |
+
+**YouTube video:**: [Link](https://youtu.be/4_-SnxReJ4M?si=pRn7JNzOrq-lInby)
+
 <!-- ====================================== -->
 <!-- LangGraph_1o1_Agentic_Customer_Support -->
 <!-- ====================================== -->

@@ -30,6 +30,8 @@ A hands-on lab of modern **Retrieval-Augmented Generation (RAG)** techniques—b
 * Clear separation of **data processing** vs **inference**.
 * Easy to extend with your own documents.
 
+**YouTube video:**: [Link](https://youtu.be/4_-SnxReJ4M?si=pRn7JNzOrq-lInby)
+
 ---
 
 ## 🏗️ Architecture
